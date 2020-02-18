@@ -15,7 +15,7 @@ code = {' ': ' /', 'a':'.-', 'b':'-...',
         '(':'-.--.', ')':'-.--.-'}
 
 def letters_to_morse_code(text):
-    morse_code = ''
+    morse_code = ' '
     for letter in text:
         if letter != ' ':
             morse_code += code[letter] + ' '
@@ -27,28 +27,34 @@ def letters_to_morse_code(text):
 def morse_code_to_letters(text):
     text += ' '
     decrypt = ''
-    decrypted_text = ''
+    encrypted_text = ''
     for letter in text:
         if (letter != ' '):
             i = 0
-            decrypted_text += letter
+            encrypted_text += letter
         else:
             i += 1
             if i == 2:
-                decrypt += ' '
+                decrypt += ''
             else:
-                decrypt += list(code.keys())[list(code.values()).index(decrypted_text)]
-                decrypted_text = ''
+                decrypt += list(code.keys())[list(code.values()).index(encrypted_text)]
+                encrypted_text = ''
 
     return decrypt
-def main():
+    
+def cipher_text():
     text = "hi there"
-    result = letters_to_morse_code(text.lower())
-    print (result)
+    cipher = letters_to_morse_code(text.lower())
+    assert len(text) != 0, 'You cannot encode a blank space'
+    print(cipher)
   
-    text = ".- -.-. - "
-    result = morse_code_to_letters(text)
-    print (result)
+    text = ".... . .-.. .-.. ---"
+    text_length =list(text.split(' '))
+    cipher = morse_code_to_letters(text)
+    assert len(text) != 0
+
+    print(cipher)
+    #print(len(text_length), "characters.")
 
 
-main()
+cipher_text()
