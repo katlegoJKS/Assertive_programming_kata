@@ -1,27 +1,26 @@
-code = {'/': ' ', 'a':'.-', 'b':'-...', 
-        'c':'-.-.', 'd':'-..', 'e':'.', 
-        'f':'..-.', 'g':'--.', 'h':'....', 
-        'i':'..', 'j':'.---', 'k':'-.-', 
-        'l':'.-..', 'm':'--', 'n':'-.', 
-        'o':'---', 'p':'.--.', 'q':'--.-', 
-        'r':'.-.', 's':'...', 't':'-', 
-        'u':'..-', 'v':'...-', 'w':'.--', 
-        'x':'-..-', 'y':'-.--', 'z':'--..', 
-        '1':'.----', '2':'..---', '3':'...--', 
-        '4':'....-', '5':'.....', '6':'-....', 
-        '7':'--...', '8':'---..', '9':'----.', 
-        '0':'-----', ', ':'--..--', '.':'.-.-.-', 
-        '?':'..--..', '|':'-..-.', '-':'-....-', 
-        '(':'-.--.', ')':'-.--.-'}
+MORSE_CODE_DICT = {'A':'.-', 'B':'-...', 
+		           'C':'-.-.', 'D':'-..', 'E':'.', 
+		           'F':'..-.', 'G':'--.', 'H':'....', 
+		           'I':'..', 'J':'.---', 'K':'-.-', 
+		           'L':'.-..', 'M':'--', 'N':'-.', 
+		           'O':'---', 'P':'.--.', 'Q':'--.-', 
+		           'R':'.-.', 'S':'...', 'T':'-', 
+		           'U':'..-', 'V':'...-', 'W':'.--', 
+		           'X':'-..-', 'Y':'-.--', 'Z':'--..', 
+		           '1':'.----', '2':'..---', '3':'...--', 
+		           '4':'....-', '5':'.....', '6':'-....', 
+		           '7':'--...', '8':'---..', '9':'----.', 
+		           '0':'-----', ', ':'--..--', '.':'.-.-.-', 
+		           '?':'..--..', '/':'-..-.', '-':'-....-', 
+		           '(':'-.--.', ')':'-.--.-'}
 
 def letters_to_morse_code(text):
     morse_code = ' '
     for letter in text:
         if letter != ' ':
-            morse_code += code[letter] + ' '
+            morse_code += MORSE_CODE_DICT[letter] + ' '
         else:
             morse_code += ' /'
-
     return morse_code
 
 def morse_code_to_letters(text):
@@ -30,31 +29,33 @@ def morse_code_to_letters(text):
     encrypted_text = ''
     for letter in text:
         if (letter != ' '):
-            i = 0
+            counter = 0
             encrypted_text += letter
         else:
-            i += 1
-            if i == 2:
-                decrypt += ''
+            counter += 1
+            if counter == 2:
+                decrypt += ' '
             else:
-                decrypt += list(code.keys())[list(code.values()).index(encrypted_text)]
+                decrypt += list(MORSE_CODE_DICT.keys())[list(MORSE_CODE_DICT.values()).index(encrypted_text)]
                 encrypted_text = ''
 
     return decrypt
     
-def cipher_text():
-    text = "hi there"
-    cipher = letters_to_morse_code(text.lower())
-    assert len(text) != 0, 'You cannot encode a blank space'
-    print(cipher)
+def main():
+    text = "Hi there"
+    cipher = letters_to_morse_code(text.upper())
+    assert len(text) != 0, 'You cannot encrypt a blank text'
+    print("Original message:",text)
+    print("Message in Morse Code:",cipher)
+    print("Message length:",len(text))
   
-    text = ".... . .-.. .-.. ---"
+    text = ".... ..  - .... . .-. ."
     text_length =list(text.split(' '))
     cipher = morse_code_to_letters(text)
-    assert len(text) != 0
+    assert len(text) != 0, 'You cannot decrypt a blank text'
+    print("\nMorse Code:",text)
+    print("Message in plain text:",cipher)
+    print(f"Message length: {len(text_length)}")
 
-    print(cipher)
-    #print(len(text_length), "characters.")
-
-
-cipher_text()
+if __name__ == "__main__":
+    main()
