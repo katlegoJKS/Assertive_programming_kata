@@ -14,7 +14,7 @@ MORSE_CODE_DICT = {'A':'.-', 'B':'-...',
 		           '?':'..--..', '/':'-..-.', '-':'-....-', 
 		           '(':'-.--.', ')':'-.--.-'}
 
-def letters_to_morse_code(text):
+def encrypt_to_morse_code(text):
     morse_code = ' '
     for letter in text:
         if letter != ' ':
@@ -23,7 +23,7 @@ def letters_to_morse_code(text):
             morse_code += ' /'
     return morse_code
 
-def morse_code_to_letters(text):
+def decrypt_to_text(text):
     text += ' '
     decrypt = ''
     encrypted_text = ''
@@ -43,7 +43,7 @@ def morse_code_to_letters(text):
     
 def main():
     text = "Hi there"
-    cipher = letters_to_morse_code(text.upper())
+    cipher = encrypt_to_morse_code(text.upper())
     assert len(text) != 0, 'You cannot encrypt a blank text'
     print("Original message:",text)
     print("Message in Morse Code:",cipher)
@@ -51,11 +51,11 @@ def main():
   
     text = ".... ..  - .... . .-. ."
     text_length =list(text.split(' '))
-    cipher = morse_code_to_letters(text)
+    cipher = decrypt_to_text(text)
     assert len(text) != 0, 'You cannot decrypt a blank text'
     print("\nMorse Code:",text)
     print("Message in plain text:",cipher)
-    print(f"Message length: {len(text_length)}")
+    print("Message length: {}".format(len(text_length)))
 
 if __name__ == "__main__":
     main()
